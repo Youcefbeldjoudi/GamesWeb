@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Youcef Beldjoudi - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f0f23;
+            --secondary: #1a1a2e;
+            --accent-blue: #00f5ff;
+            --accent-purple: #9d4edd;
+            --accent-cyan: #00ffcc;
+            --text-light: #e6e6e6;
+            --text-dark: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--primary);
+            color: var(--text-light);
+            overflow-x: hidden;
+            cursor: auto;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+
+        .custom-cursor {
+            display: none !important;
+        }
+
+        .custom-cursor-follower {
+            display: none !important;
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.7);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .glow-effect:hover {
+            box-shadow: 0 0 20px rgba(0, 245, 255, 1), 0 0 30px rgba(157, 78, 221, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .glow-effect:hover::before {
+            left: 100%;
+        }
+
+        .neon-text {
+            text-shadow: 0 0 5px var(--accent-blue), 0 0 10px var(--accent-blue), 0 0 15px var(--accent-blue);
+            animation: neon-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes neon-pulse {
+            0%, 100% { text-shadow: 0 0 5px var(--accent-blue), 0 0 10px var(--accent-blue), 0 0 15px var(--accent-blue); }
+            50% { text-shadow: 0 0 10px var(--accent-blue), 0 0 20px var(--accent-blue), 0 0 30px var(--accent-blue); }
+        }
+
+        .section-title {
+            position: relative;
+            display: block;
+            margin-bottom: 3rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 200px;
+            max-width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 2px;
+            transform-origin: center;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .section-title:hover::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        .project-card {
+            background: linear-gradient(145deg, rgba(26, 26, 46, 0.8), rgba(15, 15, 35, 0.8));
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            position: relative;
+            padding: 1.5rem;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(157, 78, 221, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.3);
+            border-color: rgba(0, 245, 255, 0.5);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        /* Project media wrapper: provides consistent aspect, fallback background and nicer presentation */
+        .project-media {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(11,11,21,0.6), rgba(21,20,38,0.6));
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .project-media img {
+            display: block;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card h3 {
+            letter-spacing: 0.6px;
+        }
+
+        .project-card p {
+            color: #c9c9c9;
+        }
+
+        .project-card p {
+            color: #b3b3b3;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(0, 245, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid transparent;
+        }
+
+        .tech-tag:hover {
+            background: rgba(0, 245, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 245, 255, 0.2);
+            border-color: rgba(0, 245, 255, 0.5);
+        }
+
+        .particles-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-12px) scale(1.02); }
+            100% { transform: translateY(0px) scale(1); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .no-select {
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            z-index: 50;
+            background-color: rgba(15, 15, 35, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            top: 0;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        nav .logo {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background-color: rgba(15, 15, 35, 0.95);
+            padding: 1rem;
+            flex-direction: column;
+            gap: 1rem;
+            border-top: 1px solid rgba(0, 245, 255, 0.2);
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .language-toggle {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .lang-btn {
+            padding: 0.3rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            cursor: pointer;
+            background-color: transparent;
+            color: var(--text-light);
+        }
+
+        .lang-btn.active {
+            background-color: var(--accent-blue);
+            color: #000;
+            border-color: var(--accent-blue);
+        }
+
+        .lang-btn:hover {
+            border-color: var(--accent-blue);
+        }
+
+        /* Main content */
+        main {
+            flex: 1;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Hero Section */
+        #accueil {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #accueil .container {
+            text-align: center;
+            width: 100%;
+        }
+
+        #accueil h1 {
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        #accueil p {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button-group a {
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            min-width: 250px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--accent-purple);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-purple);
+        }
+
+        /* Projects Section */
+        #projets {
+            padding: 4rem 0;
+            background: linear-gradient(180deg, rgba(26, 26, 46, 0.5), rgba(15, 15, 35, 0.5));
+        }
+
+        #projets .container {
+            width: 100%;
+        }
+
+        #projets h2 {
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .projects-desc {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #b3b3b3;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .empty-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        /* About Section */
+        #apropos {
+            padding: 4rem 0;
+        }
+
+        #apropos h2 {
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .about-content h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+            text-align: center;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: #b3b3b3;
+            font-size: 0.95rem;
+        }
+
+        .tech-tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 4rem 0;
+        }
+
+        #contact h2 {
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-section h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: linear-gradient(145deg, rgba(26, 26, 46, 0.8), rgba(15, 15, 35, 0.8));
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            gap: 0.75rem;
+        }
+
+        /* Layout and sizing improvements for 'Mes réseaux' */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: stretch;
+        }
+
+        .social-link {
+            justify-content: flex-start;
+            min-width: 160px;
+            padding: 0.75rem 1rem;
+        }
+
+        .social-link svg {
+            width: 26px;
+            height: 26px;
+            flex-shrink: 0;
+            margin-right: 0.6rem;
+        }
+
+        .social-link span {
+            font-weight: 600;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(145deg, rgba(26, 26, 46, 0.95), rgba(15, 15, 35, 0.95));
+            border-color: rgba(0, 245, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+        }
+
+        .social-link:hover {
+            transform: translateY(-4px);
+        }
+
+        .social-link:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0,245,255,0.18);
+        }
+
+        /* Project CTA (Voir plus) centered and styled like contact buttons */
+        .project-cta {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .project-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.25rem;
+            font-size: 0.95rem;
+            min-width: 180px;
+            border-radius: 10px;
+            border: 1px solid rgba(0,245,255,0.15);
+            background: linear-gradient(145deg, rgba(26,26,46,0.9), rgba(15,15,35,0.9));
+            color: var(--text-light);
+            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-decoration: none;
+        }
+
+        .project-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(0,245,255,0.08), 0 6px 12px rgba(157,78,221,0.06);
+            border-color: rgba(0,245,255,0.5);
+        }
+
+        @media (max-width: 480px) {
+            .project-btn {
+                min-width: 100%;
+                padding: 0.75rem 1rem;
+                box-sizing: border-box;
+            }
+        }
+
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .social-link span {
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 1.5rem 0;
+            background: linear-gradient(180deg, rgba(26, 26, 46, 0.5), rgba(15, 15, 35, 0.5));
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+            border-top: 1px solid rgba(0, 245, 255, 0.1);
+        }
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes gentle-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse-gentle {
+            animation: gentle-pulse 3s ease-in-out infinite;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--accent-blue), var(--accent-purple));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--accent-cyan), var(--accent-purple));
+        }
+
+        /* Focus states */
+        input:focus, textarea:focus, button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 245, 255, 0.3);
+            transition: box-shadow 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .custom-cursor, .custom-cursor-follower {
+                display: none !important;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav .nav-links {
+                display: none;
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .button-group a {
+                min-width: 100%;
+                width: 100%;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card img {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav .container {
+                padding: 0 1rem;
+            }
+
+            #accueil h1 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .project-card {
+                padding: 1rem;
+            }
+
+            .about-content h3 {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Toast notification for non-blocking messages */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 24px;
+            transform: translateX(-50%);
+            background: rgba(17, 17, 28, 0.96);
+            color: var(--text-light);
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+            font-size: 0.95rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-6px);
+        }
+    </style>
+</head>
+<body class="ios-fix">
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="custom-cursor-follower" id="cursorFollower"></div>
+
+    <canvas class="particles-bg" id="particlesCanvas"></canvas>
+
+    <nav>
+        <div class="container">
+            <a href="#" class="logo neon-text no-select pulse-gentle">Youcef Beldjoudi</a>
+            <div class="nav-links">
+                <a href="#accueil" class="no-select" data-i18n="nav-home">Accueil</a>
+                <a href="#projets" class="no-select" data-i18n="nav-projects">Projets</a>
+                <a href="#apropos" class="no-select" data-i18n="nav-about">À propos</a>
+                <a href="#contact" class="no-select" data-i18n="nav-contact">Contact</a>
+                <div class="language-toggle">
+                    <button class="lang-btn active" data-lang="fr">FR</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuToggle">☰</button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#accueil" class="no-select" data-i18n="nav-home">Accueil</a>
+            <a href="#projets" class="no-select" data-i18n="nav-projects">Projets</a>
+            <a href="#apropos" class="no-select" data-i18n="nav-about">À propos</a>
+            <a href="#contact" class="no-select" data-i18n="nav-contact">Contact</a>
+            <div class="language-toggle">
+                <button class="lang-btn active" data-lang="fr">FR</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="accueil">
+            <div class="container">
+                <h1 class="neon-text floating">YOUCEF BELDJOUDI</h1>
+                <p data-i18n="hero-tagline">Jeune développeur en autodidacte de sites et jeux vidéos.</p>
+                <div class="button-group">
+                    <a href="#projets" class="glow-effect btn-primary" data-i18n="btn-projects">Voir mes projets</a>
+                    <a href="#contact" class="glow-effect btn-secondary" data-i18n="btn-contact">Me contacter</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="projets">
+            <div class="container">
+                <h2 class="section-title" data-i18n="projects-title">MES PROJETS</h2>
+                <p class="projects-desc" data-i18n="projects-desc">Découvrez une sélection de mes jeux vidéo innovants.</p>
+                
+                <div class="projects-grid" id="projectsGrid">
+                    <div class="project-card" data-category="jeux">
+                        <!-- If you have a local copy, replace the src with 'assets/images/rewitness.png' for better reliability -->
+                        <figure class="project-media">
+                               <img src="https://img.itch.zone/aW1nLzI0ODI3MDQ1LnBuZw==/original/%2BA%2FJ%2B%2B.png"
+                                 alt="REWITNESS"
+                                 loading="lazy"
+                                 width="640"
+                                 height="400"
+                                 onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22640%22 height=%22400%22 viewBox=%220 0 640 400%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%2311151c%22/><text x=%2250%25%22 y=%2250%25%22 fill=%22%23cfcfcf%22 font-size=%2230%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 font-family=%22Poppins,%20sans-serif%22>Image indisponible</text></svg>';">
+                        </figure>
+                        <h3>REWITNESS</h3>
+                        <p data-i18n="rewitness-desc">Vous arrivez dans un manoir isolé pour enquêter sur la disparition d'une famille. Sur dix jours, vous explorez, rétablissez le courant, rassemblez des preuves et découvrez la vérité tandis que la maison devient de plus en plus hostile. Dans les derniers jours, une présence vous traque : si elle vous capture, l'enquête recommence au jour 1.</p>
+                        <div class="tech-tags-container">
+                            <span class="tech-tag">Unity 3D</span>
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">Game Design</span>
+                        </div>
+                        <div class="project-cta">
+                            <a href="https://youcef-beldjoudi.itch.io/rewitness" target="_blank" rel="noopener noreferrer" class="glow-effect btn-secondary project-btn" data-i18n="btn-more">Voir plus</a>
+                        </div>
+                    </div>
+
+                    <div class="empty-message">
+                        <p data-i18n="more-projects">D'autres projets arrivent bientôt...</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;" data-i18n="stay-tuned">Restez à l'écoute !</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="apropos">
+            <div class="container">
+                <h2 class="section-title" data-i18n="about-title">À PROPOS DE MOI</h2>
+                
+                <div class="about-content">
+                    <h3 data-i18n="about-subtitle">Développeur autodidacte et étudiant en électronique</h3>
+                    <p data-i18n="about-p1">Je suis un jeune développeur autodidacte de 20 ans, actuellement étudiant dans les domaines de l'électronique, de l'électrotechnique et de l'automatique.</p>
+                    <p data-i18n="about-p2">Passionné par les technologies numériques, je conçois différents types de projets personnels : jeux vidéo et sites web.</p>
+                    <p data-i18n="about-p3">Mon objectif est de créer des solutions innovantes en combinant mes compétences techniques, ma curiosité et mon envie constante d'apprendre et de progresser.</p>
+                    
+                    <h3 data-i18n="tech-title">Technologies maîtrisées</h3>
+                    <div class="tech-tags-container">
+                        <span class="tech-tag">Unity 3D</span>
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">C</span>
+                        <span class="tech-tag">Html/Css</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">3D Modeling</span>
+                        <span class="tech-tag">Game Design</span>
+                        <span class="tech-tag">Sound Design</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title" data-i18n="contact-title">CONTACT</h2>
+                
+                <div class="contact-content" style="max-width: 500px;">
+                    <div class="contact-section" style="text-align: center;">
+                        <h3 data-i18n="networks-title" style="text-align: center; margin-bottom: 2rem;">Mes réseaux</h3>
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/youcefbeldjoudi27/" target="_blank" rel="noopener noreferrer" class="social-link glow-effect" aria-label="Instagram" title="Instagram">
+                                <!-- Replaced with a simpler stroke-based SVG to avoid rendering issues on some browsers -->
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="false">
+                                    <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.5" fill="none" />
+                                    <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.5" fill="none" />
+                                    <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" />
+                                </svg>
+                                <span>Instagram</span>
+                            </a>
+                            <a href="https://youcef-beldjoudi.itch.io/" target="_blank" rel="noopener noreferrer" class="social-link glow-effect" aria-label="Itch.io" title="Itch.io">
+                                <svg fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
+                                </svg>
+                                <span>Itch.io</span>
+                            </a>
+                            <a id="emailLink" href="mailto:youcefbeldjoudi830@gmail.com" class="social-link glow-effect" aria-label="Envoyer un email" title="Envoyer un email">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <span>Email</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Youcef Beldjoudi. <span data-i18n="footer-rights">Tous droits réservés</span>.</p>
+        </div>
+    </footer>
+
+    <!-- Toast element for non-blocking messages -->
+    <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <script>
+        const translations = {
+            fr: {
+                'nav-home': 'Accueil',
+                'nav-projects': 'Projets',
+                'nav-about': 'À propos',
+                'nav-contact': 'Contact',
+                'hero-tagline': 'Jeune développeur en autodidacte de sites et jeux vidéos.',
+                'btn-projects': 'Voir mes projets',
+                'btn-contact': 'Me contacter',
+                'projects-title': 'MES PROJETS',
+                'projects-desc': 'Découvrez une sélection de mes jeux vidéo innovants.',
+                'rewitness-desc': 'Un jeu d\'aventure passionnant où vous découvrez des mystères et résolvez des énigmes pour révéler les vérités cachées.',
+                    'rewitness-desc': 'Vous arrivez dans un manoir isolé pour enquêter sur la disparition d\'une famille. Sur dix jours de jeu, vous explorez, rétablissez le courant, rassemblez des preuves et découvrez la vérité tandis que la maison devient de plus en plus hostile. Dans les derniers jours, une présence vous traque : si elle vous capture, l\'enquête recommence au jour 1.' ,
+                'btn-more': 'Voir plus',
+                'more-projects': 'D\'autres projets arrivent bientôt...',
+                'stay-tuned': 'Restez à l\'écoute !',
+                'about-title': 'À PROPOS DE MOI',
+                'about-subtitle': 'Développeur autodidacte et étudiant en électronique',
+                'about-p1': 'Je suis un jeune développeur autodidacte de 20 ans, actuellement étudiant dans les domaines de l\'électronique, de l\'électrotechnique et de l\'automatique.',
+                'about-p2': 'Passionné par les technologies numériques, je conçois différents types de projets personnels : jeux vidéo et sites web.',
+                'about-p3': 'Mon objectif est de créer des solutions innovantes en combinant mes compétences techniques, ma curiosité et mon envie constante d\'apprendre et de progresser.',
+                'tech-title': 'Technologies maîtrisées',
+                'contact-title': 'CONTACT',
+                'networks-title': 'Mes réseaux',
+                'contact-info': 'Informations de contact',
+                'footer-rights': 'Tous droits réservés'
+            },
+            en: {
+                'nav-home': 'Home',
+                'nav-projects': 'Projects',
+                'nav-about': 'About',
+                'nav-contact': 'Contact',
+                'hero-tagline': 'Self-taught young developer of websites and video games.',
+                'btn-projects': 'View my projects',
+                'btn-contact': 'Contact me',
+                'projects-title': 'MY PROJECTS',
+                'projects-desc': 'Discover a selection of my innovative video games.',
+                'rewitness-desc': 'You arrive at an isolated manor to investigate a family\'s disappearance. Over ten in-game days you explore, restore power, gather evidence and uncover truths as the house grows hostile. In the last days a presence begins to hunt you — if it catches you the investigation resets to day one.',
+                'btn-more': 'Learn more',
+                'more-projects': 'More projects coming soon...',
+                'stay-tuned': 'Stay tuned!',
+                'about-title': 'ABOUT ME',
+                'about-subtitle': 'Self-taught developer and electronics student',
+                'about-p1': 'I am a self-taught young developer, 20 years old, currently studying in the fields of electronics, electrical engineering and automation.',
+                'about-p2': 'Passionate about digital technologies, I design various types of personal projects: video games and websites.',
+                'about-p3': 'My goal is to create innovative solutions by combining my technical skills, curiosity and constant desire to learn and improve.',
+                'tech-title': 'Mastered Technologies',
+                'contact-title': 'CONTACT',
+                'networks-title': 'My Networks',
+                'contact-info': 'Contact Information',
+                'footer-rights': 'All rights reserved'
+            }
+        };
+
+        let currentLanguage = 'fr';
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                element.textContent = translations[lang][key] || element.textContent;
+            });
+
+            document.documentElement.lang = lang;
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll(`[data-lang="${lang}"]`).forEach(btn => {
+                btn.classList.add('active');
+            });
+
+            localStorage.setItem('language', lang);
+        }
+
+        function isIOS() {
+            return /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('language') || 'fr';
+            setLanguage(savedLang);
+
+            document.querySelectorAll('[data-lang]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.getAttribute('data-lang');
+                    setLanguage(lang);
+                });
+            });
+
+            if (!isIOS()) {
+                initCustomCursor();
+            }
+            
+            initParticles();
+            initSmoothScroll();
+            initMobileMenu();
+            initEmailLink();
+            initAnimations();
+        });
+
+        function initAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        function initCustomCursor() {
+            const cursor = document.getElementById('cursor');
+            const cursorFollower = document.getElementById('cursorFollower');
+            
+            cursor.style.display = 'block';
+            cursorFollower.style.display = 'block';
+            
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                setTimeout(() => {
+                    cursorFollower.style.left = e.clientX + 'px';
+                    cursorFollower.style.top = e.clientY + 'px';
+                }, 100);
+            });
+            
+            const interactiveElements = document.querySelectorAll('a, button, .project-card');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(1.5)';
+                    cursorFollower.style.transform = 'scale(1.2)';
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                    cursorFollower.style.transform = 'scale(1)';
+                });
+            });
+        }
+
+        function initParticles() {
+            const canvas = document.getElementById('particlesCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            const particles = [];
+            const particleCount = isIOS() ? 10 : 25;
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 1,
+                    speedX: (Math.random() - 0.5) * 0.5,
+                    speedY: (Math.random() - 0.5) * 0.5,
+                    color: `rgba(${Math.random() * 100 + 155}, ${Math.random() * 100 + 155}, ${Math.random() * 100 + 255}, ${Math.random() * 0.3 + 0.2})`
+                });
+            }
+            
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.x += particle.speedX;
+                    particle.y += particle.speedY;
+                    
+                    if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+                    if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+                    
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    ctx.fillStyle = particle.color;
+                    ctx.fill();
+                });
+                
+                requestAnimationFrame(animateParticles);
+            }
+            
+            animateParticles();
+        }
+
+        function initSmoothScroll() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#' || !href.startsWith('#')) return;
+                    
+                    e.preventDefault();
+                    
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 80;
+                        
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                        
+                        const mobileMenu = document.getElementById('mobileMenu');
+                        if (mobileMenu && mobileMenu.classList.contains('active')) {
+                            mobileMenu.classList.remove('active');
+                        }
+                    }
+                });
+            });
+        }
+
+        function initMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (!mobileMenuToggle || !mobileMenu) return;
+            
+            mobileMenuToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                mobileMenu.classList.toggle('active');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                    mobileMenu.classList.remove('active');
+                }
+            });
+
+            window.addEventListener('scroll', () => {
+                mobileMenu.classList.remove('active');
+            });
+        }
+
+        function initEmailLink() {
+            const email = 'youcefbeldjoudi830@gmail.com';
+            const link = document.getElementById('emailLink');
+            const toastEl = document.getElementById('toast');
+            if (!link) return;
+
+            function showToast(message, timeout = 4000) {
+                if (!toastEl) return;
+                toastEl.textContent = message;
+                toastEl.classList.add('show');
+                setTimeout(() => {
+                    toastEl.classList.remove('show');
+                }, timeout);
+            }
+
+            link.addEventListener('click', function(e) {
+                const mailto = `mailto:${email}`;
+                const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`;
+
+                // First, try to open Gmail compose in a new tab (user asked for Gmail specifically)
+                try {
+                    const win = window.open(gmailUrl, '_blank');
+                    // If window.open is blocked or returned null, try mailto as fallback
+                    if (!win) {
+                        window.location.href = mailto;
+                    }
+                } catch (err) {
+                    try { window.location.href = mailto; } catch (e) { /* noop */ }
+                }
+
+                // Also attempt to copy the email to clipboard as a safety net
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(email).then(() => {
+                        showToast('Adresse copiée : ' + email);
+                    }).catch(() => {
+                        showToast("Votre client mail ne semble pas configuré. Copiez manuellement : " + email);
+                    });
+                } else {
+                    showToast("Votre client mail ne semble pas configuré. Copiez manuellement : " + email);
+                }
+
+                e.preventDefault();
+            });
+        }
+    </script>
+</body>
+</html>
